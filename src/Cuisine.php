@@ -7,6 +7,7 @@
 
         function __construct($name, $id = null){
             $this->name = $name;
+            $this->id = $id;
         }
 
         function getName(){
@@ -22,6 +23,21 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
+        static function getAll()
+        {
+            $returned_cuisines = $GLOBALS['DB']->query("SELECT * FROM cuisines;");
+            var_dump($returned_cuisines);
+            $cuisines = array();
+            foreach($returned_cuisines as $cuisine){
+                $name = $cuisine['name'];
+                $id = $cuisine['id'];
+                $new_cuisines = new Cuisine($name, $id);
+                array_push($cuisines, $new_cuisines);
+            }
+            return $cuisines;
+
+
+        }
 
         static function deleteAll(){
             $GLOBALS['DB']->exec("DELETE FROM cuisines;");
