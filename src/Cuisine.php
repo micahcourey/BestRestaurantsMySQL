@@ -26,7 +26,6 @@
         static function getAll()
         {
             $returned_cuisines = $GLOBALS['DB']->query("SELECT * FROM cuisines;");
-            var_dump($returned_cuisines);
             $cuisines = array();
             foreach($returned_cuisines as $cuisine){
                 $name = $cuisine['name'];
@@ -35,16 +34,24 @@
                 array_push($cuisines, $new_cuisines);
             }
             return $cuisines;
-
-
         }
 
         static function deleteAll(){
             $GLOBALS['DB']->exec("DELETE FROM cuisines;");
         }
 
-
-
+        static function find($search_id)
+        {
+            $found_cuisine = null;
+            $cuisines = Cuisine::getAll();
+            foreach($cuisines as $cuisine) {
+                $cuisine_id = $cuisine->getId();
+                if ($cuisine_id == $search_id) {
+                    $found_cuisine = $cuisine;
+                }
+            }
+            return $found_cuisine;
+        }
     }
 
 ?>
