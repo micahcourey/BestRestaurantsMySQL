@@ -1,0 +1,11 @@
+<h1>Update the {{restaurant.getDescription}} restaurant</h1>
+
+<form action="/restaurant/{{restaurant.getId}}" method="post">
+    <input name="_method" type="hidden" value="patch">
+
+    <label for="name">Rename your Restaurant:</label>
+    <input id="name" name="name" type="text">
+
+    <button type="submit">Update</button>
+
+</form>

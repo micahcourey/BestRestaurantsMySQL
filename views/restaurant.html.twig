@@ -1,0 +1,31 @@
+<html>
+<head>
+    <title>Best Restaurants</title>
+</head>
+<body>
+    <h1>Best Restaurants</h1>
+    <h2>{{ restaurant.getDescription }}</h2>
+
+    {% if restaurants is not empty %}
+      <p>Here are all your restaurants:</p>
+    <ul>
+      {% for restaurant in restaurants %}
+        <li>{{ restaurant.getDescription }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <form action='/restaurants' method='post'>
+      <label for='description'>Restaurant Description</label>
+      <input id='description' name='description' type='text'>
+
+      <button type='submit'>Add Restaurant</button>
+    </form>
+    <form action='/delete_restaurants' method='post'>
+      <button type='submit'>delete</button>
+    </form>
+
+    <p><a href="/restaurants/{{ restaurant.getId }}/edit">Edit this restaurant</a></p>
+
+    <p><a href='/'>Home</a></p>
+</body>
+</html>

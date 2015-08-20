@@ -2,6 +2,7 @@
 
     class Cuisine
     {
+
         private $name;
         private $id;
 
@@ -22,9 +23,23 @@
             $this->name = $new_name;
         }
 
+        function getCuisines(){
+           $GLOBALS['DB']->query("SELECT * FROM restaurants WHERE id = {$this->getId()};");
+        }
+
+        function getRestaurants(){
+           $GLOBALS['DB']->query("SELECT * FROM cuisines WHERE id = {$this->getId()};");
+        }
+
         function save(){
             $GLOBALS['DB']->exec("INSERT INTO cuisines (name) VALUES ('{$this->getName()}')");
             $this->id = $GLOBALS['DB']->lastInsertId();
+        }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM cuisines WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE cuisine_id = {$this->getId()};");
         }
 
         function update($new_name)
@@ -56,6 +71,9 @@
             $cuisines = Cuisine::getAll();
             foreach($cuisines as $cuisine) {
                 $cuisine_id = $cuisine->getId();
+                //var_dump($cuisine_id);
+
+                var_dump($search_id);
                 if ($cuisine_id == $search_id) {
                     $found_cuisine = $cuisine;
                 }

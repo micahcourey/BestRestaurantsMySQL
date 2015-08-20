@@ -31,10 +31,20 @@
         {
             return $this->cuisine_id;
         }
+
+        function getRestaurants(){
+           $GLOBALS['DB']->query("SELECT * FROM cuisines WHERE id = {$this->getCuisineId()};");
+        }
+
         function save()
         {
             $GLOBALS['DB']->exec("INSERT INTO restaurants (description, cuisine_id) VALUES ('{$this->getDescription()}', {$this->getCuisineId()});");
             $this->id = $GLOBALS['DB']->lastInsertId();
+        }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE id = {$this->getId()};");
         }
 
         function update($new_description)

@@ -137,7 +137,7 @@
              $result = Restaurant::find($test_restaurant->getId());
              //Assert
              $this->assertEquals($test_restaurant, $result);
-         }
+         }   
 
          function testUpdate()
          {

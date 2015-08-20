@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Best Restaurants</title>
+    </head>
+    <body>
+        <h1>Best Restaurants</h1>
+        <p>Create a new cuisine:</p>
+
+        <form action="/cuisines" method="post">
+            <label for="name">Cuisine name:</label>
+            <input id="name" name="name" type="text">
+
+            <button type="submit">Add cuisine</button>
+        </form>
+
+        {% if cuisines is not empty %}
+            <p>Here is a list of all the cuisines</p>
+            <ul>
+                {% for cuisine in cuisines %}
+                    <li><a href="/cuisines/{{ cuisine.getId }}">{{ cuisine.getName }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+                <p>There are no cuisines entered yet!</p>
+        {% endif %}
+
+    </body>
+</html>
