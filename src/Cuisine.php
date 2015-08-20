@@ -18,9 +18,19 @@
             return $this->id;
         }
 
+        function setName($new_name){
+            $this->name = $new_name;
+        }
+
         function save(){
             $GLOBALS['DB']->exec("INSERT INTO cuisines (name) VALUES ('{$this->getName()}')");
             $this->id = $GLOBALS['DB']->lastInsertId();
+        }
+
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE cuisines SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
         }
 
         static function getAll()

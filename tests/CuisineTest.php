@@ -100,6 +100,21 @@
             //Assert
             $this->assertEquals($test_Cuisine, $result);
         }
+        function testUpdate()
+        {
+            //Arrange
+            $name = "Cuisine #1";
+            $id = null;
+            $test_cuisine = new Cuisine($name, $id);
+            $test_cuisine->save();
+
+            $new_name = "Cuisine #3";
+            //Act
+            $test_cuisine->update($new_name);
+
+            //Assert
+            $this->assertEquals("Cuisine #3", $test_cuisine->getName());
+        }
 
     }
 ?>

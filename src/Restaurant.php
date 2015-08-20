@@ -33,9 +33,16 @@
         }
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO restaurants (description, cuisine_id) VALUES ('{$this->getDescription()}', {$this->getCuisineId()})");
+            $GLOBALS['DB']->exec("INSERT INTO restaurants (description, cuisine_id) VALUES ('{$this->getDescription()}', {$this->getCuisineId()});");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
+
+        function update($new_description)
+        {
+            $GLOBALS['DB']->exec("UPDATE restaurants SET description = '{$new_description}' WHERE id = {$this->getId()};");
+            $this->setDescription($new_description);
+        }
+
         static function getAll()
         {
             $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants;");

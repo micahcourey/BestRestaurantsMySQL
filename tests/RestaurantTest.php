@@ -137,7 +137,27 @@
              $result = Restaurant::find($test_restaurant->getId());
              //Assert
              $this->assertEquals($test_restaurant, $result);
+         }
 
+         function testUpdate()
+         {
+             //Arrange
+             $name = "Restaurant #1";
+             $id = null;
+             $test_cuisine = new Cuisine($name, $id);
+             $test_cuisine->save();
+
+             $description = "A grade";
+             $cuisine_id = 2;
+             $test_restaurant = new Restaurant($description, $id, $cuisine_id);
+             $test_restaurant->save();
+
+             $new_description = "New grade";
+             //Act
+             $test_restaurant->update($new_description);
+
+             //Assert
+             $this->assertEquals("New grade", $test_restaurant->getDescription());
          }
 
      }
